@@ -1,0 +1,204 @@
+{
+	"info": {
+		"_postman_id": "b3fcc754-8aab-473f-bba8-a6320c636513",
+		"name": "1min.ai API",
+		"description": "Collection for 1min.ai API endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27772637"
+	},
+	"item": [
+		{
+			"name": "Chat Features",
+			"item": [
+				{
+					"name": "Chat with AI",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "API-KEY",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"CHAT_WITH_AI\",\n    \"model\": \"gpt-4o-mini\",\n    \"promptObject\": {\n        \"prompt\": \"Hello, how are you?\"\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.1min.ai/api/features?isStreaming=true",
+							"protocol": "https",
+							"host": [
+								"api",
+								"1min",
+								"ai"
+							],
+							"path": [
+								"api",
+								"features"
+							],
+							"query": [
+								{
+									"key": "isStreaming",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Chat with Image",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "API-KEY",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"CHAT_WITH_IMAGE\",\n    \"model\": \"gpt-4o-mini\",\n    \"promptObject\": {\n        \"prompt\": \"What's in this image?\",\n        \"imageList\": [\"your_image_key_here\"]\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.1min.ai/api/features?isStreaming=true",
+							"protocol": "https",
+							"host": [
+								"api",
+								"1min",
+								"ai"
+							],
+							"path": [
+								"api",
+								"features"
+							],
+							"query": [
+								{
+									"key": "isStreaming",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Image Features",
+			"item": [
+				{
+					"name": "Generate Image",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "API-KEY",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"IMAGE_GENERATOR\",\n    \"model\": \"midjourney\",\n    \"promptObject\": {\n        \"prompt\": \"A beautiful sunset over mountains\",\n        \"num_outputs\": 1,\n        \"aspect_ratio\": \"1:1\"\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.1min.ai/api/features",
+							"protocol": "https",
+							"host": [
+								"api",
+								"1min",
+								"ai"
+							],
+							"path": [
+								"api",
+								"features"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Asset Management",
+			"item": [
+				{
+					"name": "Upload Asset",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "asset",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "https://api.1min.ai/api/assets",
+							"protocol": "https",
+							"host": [
+								"api",
+								"1min",
+								"ai"
+							],
+							"path": [
+								"api",
+								"assets"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "api_key",
+			"value": ""
+		}
+	]
+}
