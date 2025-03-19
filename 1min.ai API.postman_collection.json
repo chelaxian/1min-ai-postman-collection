@@ -26,7 +26,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"type\": \"CHAT_WITH_AI\",\n    \"model\": \"gpt-4o-mini\",\n    \"promptObject\": {\n        \"prompt\": \"Hello, how are you?\"\n    }\n}"
+							"raw": "{\n    \"type\": \"CHAT_WITH_AI\",\n    \"model\": \"gpt-4o-mini\",\n    \"promptObject\": {\n        \"prompt\": \"Hello, how are you?\",\n        \"isMixed\": false,\n        \"webSearch\": false\n    }\n}"
 						},
 						"url": {
 							"raw": "https://api.1min.ai/api/features?isStreaming=true",
@@ -66,7 +66,87 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"type\": \"CHAT_WITH_IMAGE\",\n    \"model\": \"gpt-4o-mini\",\n    \"promptObject\": {\n        \"prompt\": \"What's in this image?\",\n        \"imageList\": [\"your_image_key_here\"]\n    }\n}"
+							"raw": "{\n    \"type\": \"CHAT_WITH_IMAGE\",\n    \"model\": \"gpt-4o-mini\",\n    \"promptObject\": {\n        \"prompt\": \"What's in this image?\",\n        \"imageList\": [\"your_image_key_here\"],\n        \"isMixed\": false,\n        \"webSearch\": false\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.1min.ai/api/features?isStreaming=true",
+							"protocol": "https",
+							"host": [
+								"api",
+								"1min",
+								"ai"
+							],
+							"path": [
+								"api",
+								"features"
+							],
+							"query": [
+								{
+									"key": "isStreaming",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Chat with PDF",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "API-KEY",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"CHAT_WITH_PDF\",\n    \"conversationId\": \"your_conversation_id\",\n    \"model\": \"gpt-4o-mini\",\n    \"promptObject\": {\n        \"prompt\": \"What information is in these documents?\",\n        \"isMixed\": false,\n        \"webSearch\": false\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.1min.ai/api/features?isStreaming=true",
+							"protocol": "https",
+							"host": [
+								"api",
+								"1min",
+								"ai"
+							],
+							"path": [
+								"api",
+								"features"
+							],
+							"query": [
+								{
+									"key": "isStreaming",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Chat with Web Search",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "API-KEY",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"CHAT_WITH_AI\",\n    \"model\": \"gpt-4o-mini\",\n    \"promptObject\": {\n        \"prompt\": \"What's the latest news about AI?\",\n        \"isMixed\": false,\n        \"webSearch\": true,\n        \"numOfSite\": 3,\n        \"maxWord\": 500\n    }\n}"
 						},
 						"url": {
 							"raw": "https://api.1min.ai/api/features?isStreaming=true",
@@ -128,6 +208,691 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Generate Image (DALL-E 3)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "API-KEY",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"IMAGE_GENERATOR\",\n    \"model\": \"dall-e-3\",\n    \"promptObject\": {\n        \"prompt\": \"A realistic portrait of a person\",\n        \"n\": 1,\n        \"size\": \"1024x1024\",\n        \"quality\": \"hd\",\n        \"style\": \"vivid\"\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.1min.ai/api/features",
+							"protocol": "https",
+							"host": [
+								"api",
+								"1min",
+								"ai"
+							],
+							"path": [
+								"api",
+								"features"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate Image (DALL-E 2)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "API-KEY",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"IMAGE_GENERATOR\",\n    \"model\": \"dall-e-2\",\n    \"promptObject\": {\n        \"prompt\": \"A realistic portrait of a person\",\n        \"n\": 1,\n        \"size\": \"1024x1024\"\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.1min.ai/api/features",
+							"protocol": "https",
+							"host": [
+								"api",
+								"1min",
+								"ai"
+							],
+							"path": [
+								"api",
+								"features"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate Image (Stable Diffusion XL)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "API-KEY",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"IMAGE_GENERATOR\",\n    \"model\": \"stable-diffusion-xl-1024-v1-0\",\n    \"promptObject\": {\n        \"prompt\": \"Realistic portrait of a person\",\n        \"samples\": 1,\n        \"size\": \"1024x1024\",\n        \"cfg_scale\": 7,\n        \"clip_guidance_preset\": \"NONE\",\n        \"seed\": 0,\n        \"steps\": 30\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.1min.ai/api/features",
+							"protocol": "https",
+							"host": [
+								"api",
+								"1min",
+								"ai"
+							],
+							"path": [
+								"api",
+								"features"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Image Variator (DALL-E 2)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "API-KEY",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"IMAGE_VARIATOR\",\n    \"model\": \"dall-e-2\",\n    \"promptObject\": {\n        \"imageUrl\": \"your_image_path_here\",\n        \"n\": 1,\n        \"size\": \"1024x1024\"\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.1min.ai/api/features",
+							"protocol": "https",
+							"host": [
+								"api",
+								"1min",
+								"ai"
+							],
+							"path": [
+								"api",
+								"features"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Image Variator (Clipdrop)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "API-KEY",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"IMAGE_VARIATOR\",\n    \"model\": \"clipdrop\",\n    \"promptObject\": {\n        \"imageUrl\": \"your_image_path_here\"\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.1min.ai/api/features",
+							"protocol": "https",
+							"host": [
+								"api",
+								"1min",
+								"ai"
+							],
+							"path": [
+								"api",
+								"features"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Image Variator (Midjourney)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "API-KEY",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"IMAGE_VARIATOR\",\n    \"model\": \"midjourney\",\n    \"promptObject\": {\n        \"imageUrl\": \"your_image_path_here\",\n        \"mode\": \"fast\",\n        \"n\": 4,\n        \"isNiji6\": false,\n        \"aspect_width\": 1,\n        \"aspect_height\": 1,\n        \"maintainModeration\": true\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.1min.ai/api/features",
+							"protocol": "https",
+							"host": [
+								"api",
+								"1min",
+								"ai"
+							],
+							"path": [
+								"api",
+								"features"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Image to Prompt (Midjourney)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "API-KEY",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"IMAGE_TO_PROMPT\",\n    \"model\": \"midjourney\",\n    \"promptObject\": {\n        \"imageUrl\": \"your_image_path_here\",\n        \"mode\": \"describe\",\n        \"n\": 1\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.1min.ai/api/features",
+							"protocol": "https",
+							"host": [
+								"api",
+								"1min",
+								"ai"
+							],
+							"path": [
+								"api",
+								"features"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Image Upscaler",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "API-KEY",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"IMAGE_UPSCALER\",\n    \"model\": \"stable-image\",\n    \"promptObject\": {\n        \"imageUrl\": \"your_image_path_here\",\n        \"output_format\": \"jpeg\"\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.1min.ai/api/features",
+							"protocol": "https",
+							"host": [
+								"api",
+								"1min",
+								"ai"
+							],
+							"path": [
+								"api",
+								"features"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Image Extender",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "API-KEY",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"IMAGE_EXTENDER\",\n    \"model\": \"stable-image\",\n    \"promptObject\": {\n        \"imageUrl\": \"your_image_path_here\",\n        \"output_format\": \"png\",\n        \"left\": 1,\n        \"right\": 1,\n        \"up\": 1,\n        \"down\": 1\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.1min.ai/api/features",
+							"protocol": "https",
+							"host": [
+								"api",
+								"1min",
+								"ai"
+							],
+							"path": [
+								"api",
+								"features"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Background Remover",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "API-KEY",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"BACKGROUND_REMOVER\",\n    \"model\": \"stable-image\",\n    \"promptObject\": {\n        \"imageUrl\": \"your_image_path_here\"\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.1min.ai/api/features",
+							"protocol": "https",
+							"host": [
+								"api",
+								"1min",
+								"ai"
+							],
+							"path": [
+								"api",
+								"features"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Background Replacer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "API-KEY",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"BACKGROUND_REPLACER\",\n    \"model\": \"clipdrop\",\n    \"promptObject\": {\n        \"imageUrl\": \"your_image_path_here\",\n        \"prompt\": \"Change the background to pink\"\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.1min.ai/api/features",
+							"protocol": "https",
+							"host": [
+								"api",
+								"1min",
+								"ai"
+							],
+							"path": [
+								"api",
+								"features"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Text Remover",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "API-KEY",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"TEXT_REMOVER\",\n    \"model\": \"clipdrop\",\n    \"promptObject\": {\n        \"imageUrl\": \"your_image_path_here\"\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.1min.ai/api/features",
+							"protocol": "https",
+							"host": [
+								"api",
+								"1min",
+								"ai"
+							],
+							"path": [
+								"api",
+								"features"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Object Remover",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "API-KEY",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"IMAGE_OBJECT_REMOVER\",\n    \"model\": \"stable-image\",\n    \"promptObject\": {\n        \"imageUrl\": \"your_image_path_here\",\n        \"maskUrl\": \"your_mask_path_here\",\n        \"output_format\": \"jpeg\"\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.1min.ai/api/features",
+							"protocol": "https",
+							"host": [
+								"api",
+								"1min",
+								"ai"
+							],
+							"path": [
+								"api",
+								"features"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search and Replace",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "API-KEY",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"SEARCH_AND_REPLACE\",\n    \"model\": \"stable-image\",\n    \"promptObject\": {\n        \"imageUrl\": \"your_image_path_here\",\n        \"search_prompt\": \"banana\",\n        \"prompt\": \"Let's turn the banana purple\"\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.1min.ai/api/features",
+							"protocol": "https",
+							"host": [
+								"api",
+								"1min",
+								"ai"
+							],
+							"path": [
+								"api",
+								"features"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Image Mask Editor (Inpainter)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "API-KEY",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"IMAGE_INPAINTER\",\n    \"model\": \"stable-image\",\n    \"promptObject\": {\n        \"imageUrl\": \"your_image_path_here\",\n        \"maskUrl\": \"your_mask_path_here\",\n        \"prompt\": \"replace with a red banana\",\n        \"output_format\": \"jpeg\"\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.1min.ai/api/features",
+							"protocol": "https",
+							"host": [
+								"api",
+								"1min",
+								"ai"
+							],
+							"path": [
+								"api",
+								"features"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Image Text Editor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "API-KEY",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"IMAGE_EDITOR\",\n    \"model\": \"stable-diffusion-xl-1024-v1-0\",\n    \"promptObject\": {\n        \"imageUrl\": \"your_image_path_here\",\n        \"prompt\": \"turn into cartoon\",\n        \"samples\": 1,\n        \"isMasked\": false,\n        \"cfg_scale\": 7,\n        \"clip_guidance_preset\": \"NONE\",\n        \"image_strength\": 0.35,\n        \"seed\": 0,\n        \"step_schedule_start\": 0.65,\n        \"steps\": 30\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.1min.ai/api/features",
+							"protocol": "https",
+							"host": [
+								"api",
+								"1min",
+								"ai"
+							],
+							"path": [
+								"api",
+								"features"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Face Swapper",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "API-KEY",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"FACE_SWAPPER\",\n    \"model\": \"Qubico/image-toolkit\",\n    \"promptObject\": {\n        \"targetImageUrl\": \"your_target_image_path_here\",\n        \"swapImageUrl\": \"your_face_image_path_here\",\n        \"output_format\": \"png\"\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.1min.ai/api/features",
+							"protocol": "https",
+							"host": [
+								"api",
+								"1min",
+								"ai"
+							],
+							"path": [
+								"api",
+								"features"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3D Image Generator",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "API-KEY",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"IMAGE_3D_GENERATOR\",\n    \"model\": \"stable-image\",\n    \"promptObject\": {\n        \"imageUrl\": \"your_image_path_here\"\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.1min.ai/api/features",
+							"protocol": "https",
+							"host": [
+								"api",
+								"1min",
+								"ai"
+							],
+							"path": [
+								"api",
+								"features"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Writing Features",
+			"item": [
+				{
+					"name": "Keyword Research",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "API-KEY",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"KEYWORD_RESEARCH\",\n    \"model\": \"gpt-4o-mini\",\n    \"conversationId\": \"KEYWORD_RESEARCH\",\n    \"promptObject\": {\n        \"researchType\": \"KEYWORD_STATISTICS\",\n        \"numberOfWord\": 5,\n        \"prompt\": \"artificial intelligence\"\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.1min.ai/api/features",
+							"protocol": "https",
+							"host": [
+								"api",
+								"1min",
+								"ai"
+							],
+							"path": [
+								"api",
+								"features"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Content Generator (Blog Article)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "API-KEY",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"CONTENT_GENERATOR_BLOG_ARTICLE\",\n    \"model\": \"gpt-4o-mini\",\n    \"conversationId\": \"CONTENT_GENERATOR_BLOG_ARTICLE\",\n    \"promptObject\": {\n        \"language\": \"English\",\n        \"tone\": \"informative\",\n        \"numberOfWord\": 500,\n        \"numberOfSection\": 3,\n        \"keywords\": \"artificial intelligence, machine learning\",\n        \"prompt\": \"The future of AI in healthcare\"\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.1min.ai/api/features",
+							"protocol": "https",
+							"host": [
+								"api",
+								"1min",
+								"ai"
+							],
+							"path": [
+								"api",
+								"features"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -165,6 +930,79 @@
 							"path": [
 								"api",
 								"assets"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Conversation Management",
+			"item": [
+				{
+					"name": "Create Conversation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "{{api_key}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"My Test Conversation\",\n    \"type\": \"CHAT_WITH_AI\",\n    \"model\": \"gpt-4o-mini\"\n}"
+						},
+						"url": {
+							"raw": "https://api.1min.ai/api/conversations",
+							"protocol": "https",
+							"host": [
+								"api",
+								"1min",
+								"ai"
+							],
+							"path": [
+								"api",
+								"conversations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Conversation with Files",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "API-KEY",
+								"value": "{{api_key}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"PDF Discussion\",\n    \"type\": \"CHAT_WITH_PDF\",\n    \"model\": \"gpt-4o-mini\",\n    \"fileList\": [\n        \"your_file_id_1\",\n        \"your_file_id_2\"\n    ]\n}"
+						},
+						"url": {
+							"raw": "https://api.1min.ai/api/conversations",
+							"protocol": "https",
+							"host": [
+								"api",
+								"1min",
+								"ai"
+							],
+							"path": [
+								"api",
+								"conversations"
 							]
 						}
 					},

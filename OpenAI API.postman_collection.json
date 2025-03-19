@@ -1,0 +1,512 @@
+{
+	"info": {
+		"_postman_id": "b3fcc754-8aab-473f-bba8-a6320c636515",
+		"name": "OpenAI API (1minAI relay)",
+		"description": "Collection for OpenAI API requests through 1min.ai API relay",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Chat Completions",
+			"item": [
+				{
+					"name": "Chat completion (basic)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"gpt-4o-mini\",\n    \"messages\": [\n        {\n            \"role\": \"system\",\n            \"content\": \"You are a helpful assistant.\"\n        },\n        {\n            \"role\": \"user\",\n            \"content\": \"Hello, how are you?\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5001/v1/chat/completions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"v1",
+								"chat",
+								"completions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Chat completion (streaming)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"gpt-4o-mini\",\n    \"messages\": [\n        {\n            \"role\": \"system\",\n            \"content\": \"You are a helpful assistant.\"\n        },\n        {\n            \"role\": \"user\",\n            \"content\": \"Hello, how are you?\"\n        }\n    ],\n    \"stream\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5001/v1/chat/completions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"v1",
+								"chat",
+								"completions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Chat with image",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"gpt-4o-mini\",\n    \"messages\": [\n        {\n            \"role\": \"system\",\n            \"content\": \"You are a helpful assistant.\"\n        },\n        {\n            \"role\": \"user\",\n            \"content\": [\n                {\n                    \"type\": \"text\",\n                    \"text\": \"What's in this image?\"\n                },\n                {\n                    \"type\": \"image_url\",\n                    \"image_url\": {\n                        \"url\": \"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD...\"\n                    }\n                }\n            ]\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5001/v1/chat/completions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"v1",
+								"chat",
+								"completions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Chat with web search",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"gpt-4o-mini\",\n    \"messages\": [\n        {\n            \"role\": \"system\",\n            \"content\": \"You are a helpful assistant.\"\n        },\n        {\n            \"role\": \"user\",\n            \"content\": \"What's the latest news about AI?\"\n        }\n    ],\n    \"web_search\": true,\n    \"num_of_site\": 3,\n    \"max_word\": 500\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5001/v1/chat/completions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"v1",
+								"chat",
+								"completions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Chat with function calling",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"gpt-4o-mini\",\n    \"messages\": [\n        {\n            \"role\": \"user\",\n            \"content\": \"What is the weather in London?\"\n        }\n    ],\n    \"tools\": [\n        {\n            \"type\": \"function\",\n            \"function\": {\n                \"name\": \"web_search\",\n                \"description\": \"Search the web for information\",\n                \"parameters\": {\n                    \"type\": \"object\",\n                    \"properties\": {\n                        \"query\": {\n                            \"type\": \"string\",\n                            \"description\": \"Search query\"\n                        },\n                        \"num_results\": {\n                            \"type\": \"integer\",\n                            \"description\": \"Number of results to return\"\n                        }\n                    },\n                    \"required\": [\"query\"]\n                }\n            }\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5001/v1/chat/completions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"v1",
+								"chat",
+								"completions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Image Generation",
+			"item": [
+				{
+					"name": "Generate image (DALL-E 3)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"dall-e-3\",\n    \"prompt\": \"A realistic portrait of a person\",\n    \"n\": 1,\n    \"size\": \"1024x1024\",\n    \"quality\": \"hd\",\n    \"style\": \"vivid\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5001/v1/images/generations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"v1",
+								"images",
+								"generations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate image (DALL-E 2)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"dall-e-2\",\n    \"prompt\": \"A realistic portrait of a person\",\n    \"n\": 1,\n    \"size\": \"1024x1024\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5001/v1/images/generations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"v1",
+								"images",
+								"generations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate image (Stable Diffusion XL)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"stable-diffusion-xl-1024-v1-0\",\n    \"prompt\": \"Realistic portrait of a person\",\n    \"n\": 1,\n    \"size\": \"1024x1024\",\n    \"cfg_scale\": 7,\n    \"clip_guidance_preset\": \"NONE\",\n    \"seed\": 0,\n    \"steps\": 30\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5001/v1/images/generations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"v1",
+								"images",
+								"generations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create image variation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": ""
+								},
+								{
+									"key": "n",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "1024x1024",
+									"type": "text"
+								},
+								{
+									"key": "model",
+									"value": "dall-e-2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5001/v1/images/variations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"v1",
+								"images",
+								"variations"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Content Generation",
+			"item": [
+				{
+					"name": "Keyword Research",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"prompt\": \"artificial intelligence\",\n    \"number_of_words\": 5,\n    \"research_type\": \"KEYWORD_STATISTICS\",\n    \"model\": \"gpt-4o-mini\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5001/v1/keyword_research",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"v1",
+								"keyword_research"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate Blog Article",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"prompt\": \"The future of AI in healthcare\",\n    \"language\": \"English\",\n    \"tone\": \"informative\",\n    \"number_of_words\": 500,\n    \"number_of_sections\": 3,\n    \"keywords\": \"artificial intelligence, machine learning\",\n    \"model\": \"gpt-4o-mini\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5001/v1/content/generate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"v1",
+								"content",
+								"generate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Assistants and PDF Chat",
+			"item": [
+				{
+					"name": "Create Assistant",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"PDF Document Assistant\",\n    \"instructions\": \"You are a helpful assistant that can chat about PDF documents.\",\n    \"model\": \"gpt-4o-mini\",\n    \"file_ids\": [\"your_file_id_here\"]\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5001/v1/assistants",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"v1",
+								"assistants"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Models",
+			"item": [
+				{
+					"name": "List Models",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5001/v1/models",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"v1",
+								"models"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "api_key",
+			"value": "1111111111AWWWWWWWW3444444444444HTTTTTTTTTTT8558EETTTTTTTTTT8888"
+
+		}
+	]
+} 
