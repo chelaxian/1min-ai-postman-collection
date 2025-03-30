@@ -1,0 +1,1600 @@
+{
+	"info": {
+		"_postman_id": "912a527a-9409-41aa-8fd3-66809a61b167",
+		"name": "OpenAI API (1minAI relay)",
+		"description": "Collection for OpenAI API requests through 1min.ai API relay",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10313775",
+		"_collection_link": "https://chelaxian.postman.co/workspace/1MinAI-OpenAI-API-Relay~ef78293d-0dc6-4e76-aab3-e6f7952b3e54/collection/10313775-912a527a-9409-41aa-8fd3-66809a61b167?action=share&source=collection_link&creator=10313775"
+	},
+	"item": [
+		{
+			"name": "Chat Completions",
+			"item": [
+				{
+					"name": "Chat completion (basic)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"{{chat_model}}\",\n    \"messages\": [\n        {\n            \"role\": \"system\",\n            \"content\": \"{{system_prompt}}\"\n        },\n        {\n            \"role\": \"user\",\n            \"content\": \"{{chat_prompt}}\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/chat/completions",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"chat",
+								"completions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Chat completion (streaming)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"{{chat_model}}\",\n    \"messages\": [\n        {\n            \"role\": \"system\",\n            \"content\": \"{{system_prompt}}\"\n        },\n        {\n            \"role\": \"user\",\n            \"content\": \"{{chat_prompt}}\"\n        }\n    ],\n    \"stream\": true\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/chat/completions",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"chat",
+								"completions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Chat with image",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"{{vision_model}}\",\n    \"messages\": [\n        {\n            \"role\": \"system\",\n            \"content\": \"{{system_prompt}}\"\n        },\n        {\n            \"role\": \"user\",\n            \"content\": [\n                {\n                    \"type\": \"text\",\n                    \"text\": \"{{image_question}}\"\n                },\n                {\n                    \"type\": \"image_url\",\n                    \"image_url\": {\n                        \"url\": \"{{image_url}}\"\n                    }\n                }\n            ]\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/chat/completions",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"chat",
+								"completions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Chat with web search",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"{{chat_model}}\",\n    \"messages\": [\n        {\n            \"role\": \"system\",\n            \"content\": \"{{system_prompt}}\"\n        },\n        {\n            \"role\": \"user\",\n            \"content\": \"{{web_search_question}}\"\n        }\n    ],\n    \"web_search\": true,\n    \"num_of_site\": {{num_of_sites}},\n    \"max_word\": {{max_words}}\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/chat/completions",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"chat",
+								"completions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Chat with function calling",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"{{chat_model}}\",\n    \"messages\": [\n        {\n            \"role\": \"user\",\n            \"content\": \"{{function_calling_question}}\"\n        }\n    ],\n    \"tools\": [\n        {\n            \"type\": \"function\",\n            \"function\": {\n                \"name\": \"{{function_name}}\",\n                \"description\": \"{{function_description}}\",\n                \"parameters\": {\n                    \"type\": \"object\",\n                    \"properties\": {\n                        \"query\": {\n                            \"type\": \"string\",\n                            \"description\": \"Search query\"\n                        },\n                        \"num_results\": {\n                            \"type\": \"integer\",\n                            \"description\": \"Number of results to return\"\n                        }\n                    },\n                    \"required\": [\"query\"]\n                }\n            }\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/chat/completions",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"chat",
+								"completions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Image Generation",
+			"item": [
+				{
+					"name": "Generate image (DALL-E 3)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"// Проверяем, что ответ успешный",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// Проверяем, что ответ содержит данные",
+									"pm.test(\"Response has data array\", function () {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson).to.have.property('data');",
+									"    pm.expect(responseJson.data).to.be.an('array').that.is.not.empty;",
+									"});",
+									"",
+									"// Извлекаем URL изображения и формируем полный URL",
+									"const responseJson = pm.response.json();",
+									"if (responseJson && responseJson.data && responseJson.data.length > 0) {",
+									"    // Извлекаем относительный URL изображения",
+									"    const imageUrl = responseJson.data[0].url;",
+									"    ",
+									"    // Получаем базовый URL хранилища из переменных",
+									"    const assetHost = pm.variables.get(\"asset_host\");",
+									"    ",
+									"    // Формируем полный URL",
+									"    let fullUrl = assetHost;",
+									"    if (!assetHost.endsWith('/') && !imageUrl.startsWith('/')) {",
+									"        fullUrl += '/';",
+									"    }",
+									"    fullUrl += imageUrl;",
+									"    ",
+									"    // Сохраняем полный URL в переменную для дальнейшего использования",
+									"    pm.variables.set(\"generated_image_url\", fullUrl);",
+									"    ",
+									"    // Выводим полный URL в консоль",
+									"    console.log(\"Сгенерированное изображение: \" + fullUrl);",
+									"}",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"{{dalle3_model}}\",\n    \"prompt\": \"{{image_prompt}}\",\n    \"n\": {{num_images}},\n    \"size\": \"{{image_size}}\",\n    \"quality\": \"{{image_quality}}\",\n    \"style\": \"{{image_style}}\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/images/generations",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"images",
+								"generations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate image (DALL-E 2)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"{{dalle2_model}}\",\n    \"prompt\": \"{{image_prompt}}\",\n    \"n\": {{num_images}},\n    \"size\": \"{{image_size}}\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/images/generations",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"images",
+								"generations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate image (Stable Diffusion XL)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"{{sdxl_model}}\",\n    \"prompt\": \"{{image_prompt}}\",\n    \"n\": {{num_images}},\n    \"size\": \"{{image_size}}\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/images/generations",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"images",
+								"generations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate image (Midjourney 6.1)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"{{midjourney_model}}\",\n    \"prompt\": \"{{image_prompt}} --ar {{aspect_ratio}} --no {{negative_prompt}}\",\n    \"n\": {{num_images}}\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/images/generations",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"images",
+								"generations"
+							]
+						},
+						"description": "Для Midjourney специальные параметры передаются через промпт:\n- **--ar X:Y** - соотношение сторон (например, --ar 16:9)\n- **--no** - негативный промпт (всё, что следует после этого параметра, будет учтено как негативный промпт)\n\nПример: \"красивый закат на пляже --ar 16:9 --no облака, люди, птицы\""
+					},
+					"response": []
+				},
+				{
+					"name": "Generate image (Midjourney)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"midjourney\",\n    \"prompt\": \"{{image_prompt}}\",\n    \"n\": {{num_images}}\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/images/generations",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"images",
+								"generations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate image (Stable Diffusion v1.6)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"stable-diffusion-v1-6\",\n    \"prompt\": \"{{image_prompt}}\",\n    \"n\": {{num_images}}\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/images/generations",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"images",
+								"generations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate image (Flux Schnell)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"flux-schnell\",\n    \"prompt\": \"{{image_prompt}}\",\n    \"n\": {{num_images}}\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/images/generations",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"images",
+								"generations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate image (Flux Dev)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"flux-dev\",\n    \"prompt\": \"{{image_prompt}}\",\n    \"n\": {{num_images}}\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/images/generations",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"images",
+								"generations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate image (Flux Pro)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"flux-pro\",\n    \"prompt\": \"{{image_prompt}}\",\n    \"n\": {{num_images}}\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/images/generations",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"images",
+								"generations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate image (Flux 1.1 Pro)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"flux-1.1-pro\",\n    \"prompt\": \"{{image_prompt}}\",\n    \"n\": {{num_images}}\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/images/generations",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"images",
+								"generations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate image (Leonardo.ai - Phoenix)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"phoenix\",\n    \"prompt\": \"{{image_prompt}}\",\n    \"n\": {{num_images}}\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/images/generations",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"images",
+								"generations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate image (Leonardo.ai - Lightning XL)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"lightning-xl\",\n    \"prompt\": \"{{image_prompt}}\",\n    \"n\": {{num_images}}\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/images/generations",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"images",
+								"generations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate image (Leonardo.ai - Vision XL)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"vision-xl\",\n    \"prompt\": \"{{image_prompt}}\",\n    \"n\": {{num_images}}\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/images/generations",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"images",
+								"generations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate image (Leonardo.ai - Anime XL)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"anime-xl\",\n    \"prompt\": \"{{image_prompt}}\",\n    \"n\": {{num_images}}\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/images/generations",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"images",
+								"generations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate image (Leonardo.ai - Diffusion XL)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"diffusion-xl\",\n    \"prompt\": \"{{image_prompt}}\",\n    \"n\": {{num_images}}\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/images/generations",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"images",
+								"generations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate image (Leonardo.ai - Kino XL)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"kino-xl\",\n    \"prompt\": \"{{image_prompt}}\",\n    \"n\": {{num_images}}\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/images/generations",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"images",
+								"generations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate image (Leonardo.ai - Albedo Base XL)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"albedo-base-xl\",\n    \"prompt\": \"{{image_prompt}}\",\n    \"n\": {{num_images}}\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/images/generations",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"images",
+								"generations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create image variation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"value": "",
+									"type": "file"
+								},
+								{
+									"key": "n",
+									"value": "{{num_images}}",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "{{image_size}}",
+									"type": "text"
+								},
+								{
+									"key": "model",
+									"value": "{{dalle2_model}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/images/variations",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"images",
+								"variations"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "API для генерации изображений через различные модели.\n\nДля моделей, требующих дополнительные параметры, которые не поддерживаются стандартным API OpenAI (как Midjourney), используйте специальные параметры в промпте:\n\n- **--ar X:Y** - соотношение сторон (например, --ar 16:9)\n- **--no** - негативный промпт (всё, что следует после этого параметра, будет учтено как негативный промпт)\n\nПример: \"красивый закат на пляже --ar 16:9 --no облака, люди, птицы\""
+		},
+		{
+			"name": "Image Variations",
+			"item": [
+				{
+					"name": "Create image variations (DALL-E 2)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"// Проверяем, что ответ успешный",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// Проверяем, что ответ содержит данные",
+									"pm.test(\"Response has data array\", function () {",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson).to.have.property('data');",
+									"    pm.expect(responseJson.data).to.be.an('array').that.is.not.empty;",
+									"});",
+									"",
+									"// Извлекаем URL изображения и формируем полный URL",
+									"const responseJson = pm.response.json();",
+									"if (responseJson && responseJson.data && responseJson.data.length > 0) {",
+									"    // Извлекаем относительный URL изображения",
+									"    const imageUrl = responseJson.data[0].url;",
+									"    ",
+									"    // Получаем базовый URL хранилища из переменных",
+									"    const assetHost = pm.variables.get(\"asset_host\");",
+									"    ",
+									"    // Формируем полный URL",
+									"    let fullUrl = assetHost;",
+									"    if (!assetHost.endsWith('/') && !imageUrl.startsWith('/')) {",
+									"        fullUrl += '/';",
+									"    }",
+									"    fullUrl += imageUrl;",
+									"    ",
+									"    // Сохраняем полный URL в переменную для дальнейшего использования",
+									"    pm.variables.set(\"variation_image_url\", fullUrl);",
+									"    ",
+									"    // Выводим полный URL в консоль",
+									"    console.log(\"Вариация изображения: \" + fullUrl);",
+									"}",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "model",
+									"value": "{{dalle2_model}}",
+									"type": "text"
+								},
+								{
+									"key": "n",
+									"value": "{{num_variations}}",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "{{image_size}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/images/variations",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"images",
+								"variations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create image variations (Midjourney)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "model",
+									"value": "midjourney",
+									"type": "text"
+								},
+								{
+									"key": "n",
+									"value": "{{num_variations}}",
+									"description": "Количество вариаций (обычно 4 для Midjourney)",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/images/variations",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"images",
+								"variations"
+							]
+						},
+						"description": "Создание вариаций изображения с помощью Midjourney"
+					},
+					"response": []
+				},
+				{
+					"name": "Create image variations (Stable Diffusion)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "model",
+									"value": "{{sdxl_model}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/images/variations",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"images",
+								"variations"
+							]
+						},
+						"description": "Создание вариаций изображения с помощью Stable Diffusion"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Audio",
+			"item": [
+				{
+					"name": "Transcribe Audio",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "model",
+									"value": "whisper-1",
+									"type": "text"
+								},
+								{
+									"key": "response_format",
+									"value": "text",
+									"description": "Формат ответа: text, json, verbose_json, srt, vtt",
+									"type": "text"
+								},
+								{
+									"key": "language",
+									"value": "{{audio_language}}",
+									"description": "Язык аудио (ru, en, etc.)",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "temperature",
+									"value": "0",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/audio/transcriptions",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"audio",
+								"transcriptions"
+							]
+						},
+						"description": "Преобразование аудио в текст с помощью Whisper API"
+					},
+					"response": []
+				},
+				{
+					"name": "Translate Audio",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "model",
+									"value": "whisper-1",
+									"type": "text"
+								},
+								{
+									"key": "response_format",
+									"value": "text",
+									"description": "Формат ответа: text, json, verbose_json, srt, vtt",
+									"type": "text"
+								},
+								{
+									"key": "temperature",
+									"value": "0",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/audio/translations",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"audio",
+								"translations"
+							]
+						},
+						"description": "Перевод аудио на английский язык с помощью Whisper API"
+					},
+					"response": []
+				},
+				{
+					"name": "Text to Speech",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"tts-1\",\n    \"input\": \"{{tts_text}}\",\n    \"voice\": \"{{tts_voice}}\",\n    \"response_format\": \"mp3\",\n    \"speed\": 1.0\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/audio/speech",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"audio",
+								"speech"
+							]
+						},
+						"description": "Преобразование текста в речь с помощью TTS API"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Assistants",
+			"item": [
+				{
+					"name": "Create Assistant",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"{{chat_model}}\",\n    \"name\": \"{{assistant_name}}\",\n    \"description\": \"{{assistant_description}}\",\n    \"instructions\": \"{{assistant_instructions}}\",\n    \"tools\": [{\"type\": \"code_interpreter\"}],\n    \"file_ids\": []\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/assistants",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"assistants"
+							]
+						},
+						"description": "Создание нового ассистента в системе"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Files",
+			"item": [
+				{
+					"name": "List Files",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/files",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"files"
+							]
+						},
+						"description": "Получение списка загруженных файлов пользователя"
+					},
+					"response": []
+				},
+				{
+					"name": "Upload File",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "purpose",
+									"value": "assistants",
+									"description": "Цель загрузки файла (assistants, fine-tune, etc.)",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/files",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"files"
+							]
+						},
+						"description": "Загрузка нового файла в систему"
+					},
+					"response": []
+				},
+				{
+					"name": "Get File",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/files/{{file_id}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"files",
+								"{{file_id}}"
+							]
+						},
+						"description": "Получение информации о конкретном файле"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete File",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/files/{{file_id}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"files",
+								"{{file_id}}"
+							]
+						},
+						"description": "Удаление файла из системы"
+					},
+					"response": []
+				},
+				{
+					"name": "Get File Content",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/files/{{file_id}}/content",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"files",
+								"{{file_id}}",
+								"content"
+							]
+						},
+						"description": "Получение содержимого файла по его ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Models",
+			"item": [
+				{
+					"name": "List Models",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/v1/models",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"v1",
+								"models"
+							]
+						},
+						"description": "Получение списка доступных моделей в 1min.ai API"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "api_key",
+			"value": "YOUR_API_TOKEN_HERE",
+			"type": "string"
+		},
+		{
+			"key": "protocol",
+			"value": "http",
+			"type": "string"
+		},
+		{
+			"key": "host",
+			"value": "localhost:5001",
+			"type": "string"
+		},
+		{
+			"key": "asset_host",
+			"value": "https://asset.1min.ai",
+			"type": "string"
+		},
+		{
+			"key": "chat_model",
+			"value": "gpt-4o-mini",
+			"type": "string"
+		},
+		{
+			"key": "vision_model",
+			"value": "gpt-4o-mini",
+			"type": "string"
+		},
+		{
+			"key": "dalle3_model",
+			"value": "dall-e-3",
+			"type": "string"
+		},
+		{
+			"key": "dalle2_model",
+			"value": "dall-e-2",
+			"type": "string"
+		},
+		{
+			"key": "sdxl_model",
+			"value": "stability.stable-diffusion-xl-1024-v1-0",
+			"type": "string"
+		},
+		{
+			"key": "midjourney_model",
+			"value": "midjourney_6_1",
+			"type": "string"
+		},
+		{
+			"key": "chat_prompt",
+			"value": "Привет! Расскажи мне что-нибудь интересное.",
+			"type": "string"
+		},
+		{
+			"key": "system_prompt",
+			"value": "Ты - полезный ассистент, который предоставляет точную и актуальную информацию.",
+			"type": "string"
+		},
+		{
+			"key": "image_prompt",
+			"value": "A beautiful sunset over mountains, photorealistic",
+			"type": "string"
+		},
+		{
+			"key": "image_question",
+			"value": "Что изображено на этой картинке?",
+			"type": "string"
+		},
+		{
+			"key": "image_url",
+			"value": "https://example.com/path/to/image.jpg",
+			"type": "string"
+		},
+		{
+			"key": "image_quality",
+			"value": "standard",
+			"type": "string"
+		},
+		{
+			"key": "image_style",
+			"value": "natural",
+			"type": "string"
+		},
+		{
+			"key": "aspect_ratio",
+			"value": "16:9",
+			"type": "string"
+		},
+		{
+			"key": "negative_prompt",
+			"value": "blurry, text, watermark",
+			"type": "string"
+		},
+		{
+			"key": "web_search_question",
+			"value": "Какие последние новости о технологии ИИ?",
+			"type": "string"
+		},
+		{
+			"key": "num_of_sites",
+			"value": "3",
+			"type": "number"
+		},
+		{
+			"key": "max_words",
+			"value": "300",
+			"type": "number"
+		},
+		{
+			"key": "function_calling_question",
+			"value": "Найди информацию о погоде в Москве",
+			"type": "string"
+		},
+		{
+			"key": "function_name",
+			"value": "search_information",
+			"type": "string"
+		},
+		{
+			"key": "function_description",
+			"value": "Поиск информации по запросу пользователя",
+			"type": "string"
+		},
+		{
+			"key": "num_images",
+			"value": "1",
+			"type": "number"
+		},
+		{
+			"key": "image_size",
+			"value": "1024x1024",
+			"type": "string"
+		},
+		{
+			"key": "num_variations",
+			"value": "4",
+			"type": "number"
+		},
+		{
+			"key": "audio_language",
+			"value": "ru",
+			"type": "string"
+		},
+		{
+			"key": "tts_text",
+			"value": "Привет! Это тест преобразования текста в речь.",
+			"type": "string"
+		},
+		{
+			"key": "tts_voice",
+			"value": "alloy",
+			"type": "string"
+		},
+		{
+			"key": "file_id",
+			"value": "file-123456789",
+			"type": "string"
+		},
+		{
+			"key": "assistant_name",
+			"value": "Тестовый ассистент",
+			"type": "string"
+		},
+		{
+			"key": "assistant_description",
+			"value": "Это тестовый ассистент для демонстрации API",
+			"type": "string"
+		},
+		{
+			"key": "assistant_instructions",
+			"value": "Ты полезный ассистент, который предоставляет информацию и помогает пользователям.",
+			"type": "string"
+		}
+	]
+}
